@@ -72,7 +72,20 @@
   src: url('/fonts/Ubuntu/Ubuntu-MediumItalic.ttf') format('truetype');
 }
 
+/* quicksand-variable - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 300 700;
+  /* A common range for weight variable fonts */
+  src: url('/fonts/Quicksand/Quicksand-VariableFont_wght.ttf') format('truetype-variations');
+}
+
 @theme {
   --color-green-primary: #396039;
+  --color-green-text: #008000;
+  --color-cream-primary: #F5F5DC;
   --font-sans: 'Ubuntu';
+  --font-quicksand: 'Quicksand';
 }
