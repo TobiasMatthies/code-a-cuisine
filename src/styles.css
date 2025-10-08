@@ -1,5 +1,78 @@
 @import "tailwindcss";
 
+/* ubuntu-regular - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/Ubuntu/Ubuntu-Regular.ttf') format('truetype');
+}
+
+/* ubuntu-italic - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Ubuntu';
+  font-style: italic;
+  font-weight: 400;
+  src: url('/fonts/Ubuntu/Ubuntu-Italic.ttf') format('truetype');
+}
+
+/* ubuntu-700 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/Ubuntu/Ubuntu-Bold.ttf') format('truetype');
+}
+
+/* ubuntu-700italic - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Ubuntu';
+  font-style: italic;
+  font-weight: 700;
+  src: url('/fonts/Ubuntu/Ubuntu-BoldItalic.ttf') format('truetype');
+}
+
+/* ubuntu-300 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 300;
+  src: url('/fonts/Ubuntu/Ubuntu-Light.ttf') format('truetype');
+}
+
+/* ubuntu-300italic - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Ubuntu';
+  font-style: italic;
+  font-weight: 300;
+  src: url('/fonts/Ubuntu/Ubuntu-LightItalic.ttf') format('truetype');
+}
+
+/* ubuntu-500 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 500;
+  src: url('/fonts/Ubuntu/Ubuntu-Medium.ttf') format('truetype');
+}
+
+/* ubuntu-500italic - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Ubuntu';
+  font-style: italic;
+  font-weight: 500;
+  src: url('/fonts/Ubuntu/Ubuntu-MediumItalic.ttf') format('truetype');
+}
+
 @theme {
   --color-green-primary: #396039;
+  --font-sans: 'Ubuntu';
 }
