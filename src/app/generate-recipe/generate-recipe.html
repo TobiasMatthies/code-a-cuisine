@@ -1,0 +1,38 @@
+<main class="px-16 min-h-dvh">
+  <div class="text-cream-primary max-w-[1440px] min-h-dvh m-auto">
+    <header class="w-full m-auto py-10">
+      <img src="img/Capa_2 (1).svg" alt="logo" />
+    </header>
+
+    <div class="flex flex-col items-center font-quicksand text-green-primary gap-6 mt-16">
+      <h1 class="text-6xl font-semibold">Generate a recipe</h1>
+      <p class="text-2xl">Got random stuff in your kitchen? Pop it in - we've got the perfect recipe waiting.</p>
+
+      <div class="flex gap-6 w-full">
+        <form class="bg-green-light py-6 text-green-primary rounded-3xl flex gap-8 p-6 mt-10 flex-1">
+          <div>
+            <label class="block text-2xl mb-4" for=" ingredient">Ingredient</label>
+            <input class="rounded-3xl py-2 px-3 bg-cream-light" name="ingredient" type="text">
+          </div>
+
+          <div>
+            <label class="block text-2xl mb-4" for="serving">Serving size</label>
+            <div class="flex gap-2">
+              <input min="1" max="10000" class="rounded-3xl py-2 px-3 bg-cream-light" placeholder="100" type="number">
+              <button type="button" class="rounded-3xl py-2 px-3 bg-cream-light">
+                <span>gram</span>
+                <img class="inline" src="img/arrow_drop_down.svg" alt="arrow down">
+              </button>
+
+              <img class="inline" src="img/add_2.svg" alt="add">
+            </div>
+          </div>
+        </form>
+
+        <div class="bg-green-light text-green-primary rounded-3xl p-6 mt-10 flex-1">
+          <h3 class="text-2xl">List of your ingredients</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,7 +1,7 @@
 <main class="bg-green-primary px-16 min-h-dvh">
-  <div class="text-cream-primary max-w-[1920px] min-h-dvh m-auto relative flex flex-col">
+  <div class="text-cream-primary max-w-[1440px] min-h-dvh m-auto relative flex flex-col">
     <header class="w-full m-auto py-10">
-      <img src="img/Capa_2.svg" alt="logo">
+      <img src="img/Capa_2.svg" alt="logo" />
     </header>
 
     <div class="my-24 flex-1 flex flex-col">
@@ -10,19 +10,20 @@
           <h3 class="text-5xl font-semibold font-quicksand">AI-Powered recipe generator</h3>
           <h1 class="text-8xl font-bold">Code à Cuisine</h1>
 
-          <a href="#" class="inline-block text-2xl bg-cream-primary text-green-text py-4 px-6 mt-20">Get started</a>
+          <a [routerLink]="['generate-recipe/']"
+            class="inline-block text-2xl bg-cream-primary text-green-text py-4 px-6 mt-20">Get started</a>
         </div>
 
         <p class="flex items-center gap-10 justify-self-end h-full">
           <span class="text-4xl">Hungry for inspiration?</span>
           <a href="#">
             <span class="mr-4">Go to cookbook </span>
-            <img class="inline-block" src="img/Arrow 18.svg" alt="arrow">
+            <img class="inline-block" src="img/Arrow 18.svg" alt="arrow" />
           </a>
         </p>
       </div>
 
-      <img class="absolute top-0 right-0 bottom-0 h-dvh" src="img/Visuals.png" alt="dishes">
+      <img class="absolute top-0 right-0 bottom-0 h-dvh" src="img/Visuals.png" alt="dishes" />
     </div>
   </div>
 </main>
