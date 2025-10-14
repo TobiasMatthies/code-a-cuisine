@@ -88,6 +88,6 @@
   --color-cream-primary: #F5F5DC;
   --color-green-light: rgba(57, 96, 57, 0.30);
   --color-cream-light: #FAF0E6CC;
-  --font-sans: 'Ubuntu';
-  --font-quicksand: 'Quicksand';
+  --font-sans: 'Quicksand';
+  --font-ubuntu: 'Ubuntu';
 }

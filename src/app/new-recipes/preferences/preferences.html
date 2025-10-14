@@ -4,13 +4,73 @@
       <img src="img/Capa_2 (1).svg" alt="logo" />
     </header>
 
-    <a class="font-quicksand" [routerLink]="['/generate-recipe/']">
+    <a [routerLink]="['/generate-recipe/']">
       <img class="inline" src="img/Arrow 11.svg" alt="Arrow back">
       Ingredients
     </a>
 
-    <div class="flex flex-col items-center font-quicksand text-green-primary gap-6 mt-16">
-      <h1>Choose your preferences</h1>
+    <div class="flex flex-col items-center text-green-primary gap-8 mt-16 w-full">
+      <h1 class="text-3xl font-semibold">Choose your preferences</h1>
+
+      <div class="flex gap-32 my-6">
+        <div>
+          <h3>How many portions you need?</h3>
+          <p class="flex gap-2 mt-5 items-center">
+            <img src="img/Minus.svg" alt="minus">
+            <span class="bg-green-light px-1 text-green-primary">2</span>
+            Portions
+            <img src="img/Plus.svg" alt="plus">
+          </p>
+        </div>
+        <div>
+          <h3>How many are cooking?</h3>
+          <p class="flex gap-2 mt-5 items-center">
+            <img src="img/Minus.svg" alt="minus">
+            <span class="bg-green-light px-1 text-green-primary">2</span>
+            Person
+            <img src="img/Plus.svg" alt="plus">
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-green-light py-8 px-6 text-green-primary flex flex-col gap-10 rounded-3xl">
+        <div>
+          <div class="flex">
+            <img class="mr-0.5" src="img/Frame 750.svg" alt="time">
+            <h3 class="text-2xl font-semibold">Cooking time: </h3>
+          </div>
+          <div class="flex gap-5 mt-6">
+            @for (time of preferences.times; track $index) {
+            <span class="px-3 py-1.5 bg-cream-light rounded-4xl text-green-primary">{{time | titlecase}}</span>
+            }
+          </div>
+        </div>
+        <div>
+          <div class="flex">
+            <img class="mr-0.5" src="img/public.svg" alt="time">
+            <h3 class=" text-2xl font-semibold">Cuisine: </h3>
+          </div>
+          <div class="flex gap-5 mt-6">
+            @for (time of preferences.cuisine; track $index) {
+            <span class="px-3 py-1.5 bg-cream-light rounded-4xl text-green-primary">{{time | titlecase}}</span>
+            }
+          </div>
+        </div>
+        <div>
+          <div class="flex">
+            <img class="mr-0.5" src="img/fork_spoon.svg" alt="time">
+            <h3 class=" text-2xl font-semibold">Diet Preferences: </h3>
+          </div>
+          <div class="flex gap-5 mt-6">
+            @for (time of preferences.dietPrefences; track $index) {
+            <span class="px-3 py-1.5 bg-cream-light rounded-4xl text-green-primary">{{time | titlecase}}</span>
+            }
+          </div>
+        </div>
+      </div>
+
+      <button class="mt-8 bg-green-primary text-white px-6 font-semibold py-4 text-2xl cursor-pointer">Generate
+        Recipe</button>
     </div>
   </div>
 </main>
