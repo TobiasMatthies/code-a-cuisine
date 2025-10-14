@@ -1,3 +1,7 @@
+@if (isLoading) {
+<app-loading-screen class="absolute w-full"></app-loading-screen>
+}
+
 <main class="px-16 min-h-dvh">
   <div class="text-green-primary max-w-[1440px] min-h-dvh m-auto">
     <header class="w-full m-auto py-10">
@@ -69,7 +73,8 @@
         </div>
       </div>
 
-      <button class="mt-8 bg-green-primary text-white px-6 font-semibold py-4 text-2xl cursor-pointer">Generate
+      <button (click)="onGenerateRecipe()"
+        class="mt-8 bg-green-primary text-white px-6 font-semibold py-4 text-2xl cursor-pointer">Generate
         Recipe</button>
     </div>
   </div>
