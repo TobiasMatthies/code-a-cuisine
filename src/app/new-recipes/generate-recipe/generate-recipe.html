@@ -19,12 +19,25 @@
             <label class="block text-2xl mb-4" for="serving">Serving size</label>
             <div class="flex gap-2">
               <input min="1" max="10000" class="rounded-3xl py-2 px-3 bg-cream-light" placeholder="100" type="number">
-              <button type="button" class="rounded-3xl py-2 px-3 bg-cream-light">
-                <span>gram</span>
-                <img class="inline" src="img/arrow_drop_down.svg" alt="arrow down">
-              </button>
+              <div (click)="toggleDropdown(); $event.stopPropagation()" class="relative">
+                <button type="button"
+                  class="rounded-3xl py-2 px-3 bg-cream-light text-left flex justify-between items-center w-20 cursor-pointer">
+                  <span>{{selectedUnit}}</span>
+                  <img class="inline" src="img/arrow_drop_down.svg" alt="arrow down">
+                </button>
+                @if (isDropdownOpen) {
+                <div class="absolute mt-1 w-full bg-cream-light rounded-xl z-10 overflow-hidden">
+                  @for (unit of unitsOfMeasurement; track unit) {
+                  <a (click)="selectUnit(unit, $event)"
+                    class="block px-4 py-2 text-green-primary hover:bg-green-light cursor-pointer">{{unit}}</a>
+                  }
+                </div>
+                }
+              </div>
 
-              <img class="inline" src="img/add_2.svg" alt="add">
+              <button class="cursor-pointer">
+                <img class="inline" src="img/add_2.svg" alt="add">
+              </button>
             </div>
           </div>
         </form>
