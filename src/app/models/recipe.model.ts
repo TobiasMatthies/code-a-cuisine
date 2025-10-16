@@ -1,6 +1,7 @@
 export interface Ingredient {
   servingSize: string;
   ingredient: string;
+  isEditMode: boolean;
 }
 
 export interface RecipeRequirements {

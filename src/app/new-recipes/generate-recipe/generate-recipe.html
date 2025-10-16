@@ -9,27 +9,29 @@
       <p class="text-2xl">Got random stuff in your kitchen? Pop it in - we've got the perfect recipe waiting.</p>
 
       <div class="flex gap-6 w-full">
-        <form class="bg-green-light py-6 text-green-primary rounded-3xl flex gap-8 p-6 mt-10 flex-1">
+        <form class="bg-green-light py-6 text-green-primary rounded-3xl flex gap-8 p-6 mt-10 flex-1"
+          #ingredientForm="ngForm" (ngSubmit)="onSubmit(ingredientForm)">
           <div>
             <label class="block text-2xl mb-4" for=" ingredient">Ingredient</label>
-            <input class="rounded-3xl py-2 px-3 bg-cream-light" name="ingredient" type="text">
+            <input class="rounded-3xl py-2 px-3 bg-cream-light" name="ingredient" type="text" ngModel>
           </div>
 
           <div>
             <label class="block text-2xl mb-4" for="serving">Serving size</label>
             <div class="flex gap-2">
-              <input min="1" max="10000" class="rounded-3xl py-2 px-3 bg-cream-light" placeholder="100" type="number">
+              <input min="1" max="10000" class="rounded-3xl py-2 px-3 bg-cream-light" type="number" name="servingSize"
+                [(ngModel)]="servingSize">
               <div (click)="toggleDropdown(); $event.stopPropagation()" class="relative">
                 <button type="button"
-                  class="rounded-3xl py-2 px-3 bg-cream-light text-left flex justify-between items-center w-20 cursor-pointer">
-                  <span>{{selectedUnit}}</span>
+                  class="rounded-3xl py-2 px-3 bg-cream-light text-left flex justify-between items-center w-24 cursor-pointer">
+                  <span>{{selectedUnit.name}}</span>
                   <img class="inline" src="img/arrow_drop_down.svg" alt="arrow down">
                 </button>
                 @if (isDropdownOpen) {
                 <div class="absolute mt-1 w-full bg-cream-light rounded-xl z-10 overflow-hidden">
                   @for (unit of unitsOfMeasurement; track unit) {
                   <a (click)="selectUnit(unit, $event)"
-                    class="block px-4 py-2 text-green-primary hover:bg-green-light cursor-pointer">{{unit}}</a>
+                    class="block px-4 py-2 text-green-primary hover:bg-green-light cursor-pointer">{{unit.name}}</a>
                   }
                 </div>
                 }
@@ -43,7 +45,32 @@
         </form>
 
         <div class="bg-green-light text-green-primary rounded-3xl p-6 mt-10 flex-1">
-          <h3 class="text-2xl">List of your ingredients</h3>
+          <h3 class="text-2xl mb-6">List of your ingredients</h3>
+
+          <ul class="text-black list-disc pl-5">
+            @for (ingredient of generateRecipeService.recipeRequirements.ingredients; track $index) {
+            <li class="flex justify-between">
+              <div class="flex gap-4">
+                @if (!ingredient.isEditMode) {
+                <span>{{ingredient.servingSize}}</span>
+                <span>{{ingredient.ingredient}}</span>
+                }
+                @else {
+                <input class="w-12 border-b border-b-green-primary" name="servingSize"
+                  [(ngModel)]="ingredient.servingSize" />
+                <input class="w-24 border-b border-b-green-primary" name="ingredient"
+                  [(ngModel)]="ingredient.ingredient" />
+                }
+              </div>
+
+              <div class="flex gap-4">
+                <img class="cursor-pointer" (click)="toggleEditModeForIngredient(ingredient)"
+                  [src]="ingredient.isEditMode ? 'img/Plus.svg' : 'img/edit.svg'" alt="edit">
+                <img class="cursor-pointer" (click)="deleteIngredient(ingredient)" src="img/delete.svg" alt="delete">
+              </div>
+            </li>
+            }
+          </ul>
         </div>
       </div>
 
