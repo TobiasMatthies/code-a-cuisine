@@ -1,4 +1,5 @@
 import { NgClass, TitleCasePipe } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { GenerateRecipeService } from '../../services/generate-recipe.service';
@@ -6,7 +7,7 @@ import { LoadingScreen } from '../loading-screen/loading-screen';
 
 @Component({
   selector: 'app-preferences',
-  imports: [RouterModule, TitleCasePipe, LoadingScreen, NgClass],
+  imports: [RouterModule, TitleCasePipe, LoadingScreen, NgClass, HttpClientModule],
   templateUrl: './preferences.html',
   styleUrl: './preferences.css',
 })
@@ -20,9 +21,21 @@ export class Preferences {
   };
 
   onGenerateRecipe() {
-    let requirements = this.generateRecipeService.recipeRequirements;
+    const requirements = this.generateRecipeService.recipeRequirements;
     if (requirements.cookingTime && requirements.cuisine && requirements.dietPreferences) {
       this.isLoading = true;
+      this.generateRecipeService.generateRecipe(requirements).subscribe({
+        next: (response) => {
+          console.log('Recipe generated successfully!', response);
+          // TODO: Handle success (e.g., navigate to the recipe page)
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error('Error generating recipe:', error);
+          // TODO: Handle error (e.g., show an error message)
+          this.isLoading = false;
+        },
+      });
     }
   }
 

@@ -1,0 +1,141 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-recipe",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "46be85c7-d869-4787-9a8e-c77715c91dfc",
+      "name": "Webhook",
+      "webhookId": "584d5e6b-0e54-4d64-9df6-5212b4d9c912"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are part of a workflow of an application that lets you enter the ingredients you have at home and generates recipes based on those ingredients and preferences.\nYour task is:\n- to recieve all ingredients and preferences\n- to generate exactly three recipes based on this data. They should be based on the ingredients the user has at home but can add other ingredients to improve the recipes. ingredients at home and extra ingredients should be returned as seperate fields.\n- return all three in json format\n\nEach recipe-json should include the following key-value pairs:\n- title: the name of the recipe\n- cookingTime: time to prepare this recipe\n- nutritionalInformation: values for calories, proteins, fats and carbs\n- preferences: a list of all the preferences given (cookingTime, cuisine, dietPreferences). If not value is given for one these do not return a value for this specific option\n- cooksAmount: amount of cooks\n- ingredients: a json containing two other jsons with the keys \"yourIngredients\" and \"extraIngredients\". The ingredients in this field should have the same data-format as given in the input-data, except for the \"isEditMode\"-flag.\n- directions: a json containing each step as a seperate json with these fields: order, title, description, cook (number indicating which cook should do this step, based on \"cooksAmount\")\n\nMAKE SURE THAT THE RECIPES ALWAYS FOLLOW THIS EXACT STRUCTURE. RETURN A JSON CONTAINING ONLY THESE THREE RECIPES WITHOUT ANY OTHER DATA OR TEXT!\n\nRecipe-data:\n\n{{ JSON.stringify($json.body) }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "5ee198b9-d4d2-4a34-baa5-eb70370fe005",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        720,
+        0
+      ],
+      "id": "c7f7827c-43f5-4814-823c-619df3472549",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "6078fc6f-fa3a-460c-8467-36ee5dc77a58",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "4DPdqBRuAYfJMoni",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        528,
+        0
+      ],
+      "id": "88efdeba-d616-41ec-86c2-e8d0eb6c5957",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "66087384-a347-431b-847e-b79c8cb83f9a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7c3d82778fe390a8a96b680fce69390d06ef8ca6ee4f3b830ea49e7ddde74fba"
+  },
+  "id": "eudRn2Jv9x4g2pLx",
+  "tags": []
+}

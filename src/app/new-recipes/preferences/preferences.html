@@ -78,7 +78,7 @@
             @for (diet of preferences.dietPrefences; track $index) {
             <button (click)="selectPreference('dietPreferences', diet)"
               [ngClass]="generateRecipeService.recipeRequirements.dietPreferences === diet ? 'bg-green-light' : 'bg-cream-light hover:bg-cream-primary'"
-              class="cursor-pointer px-3 py-1.5 bg-cream-light rounded-4xl text-green-primary hover:bg-cream-primary">
+              class="cursor-pointer px-3 py-1.5 bg-cream-light rounded-4xl text-green-primary">
               {{diet | titlecase}}</button>
             }
           </div>
