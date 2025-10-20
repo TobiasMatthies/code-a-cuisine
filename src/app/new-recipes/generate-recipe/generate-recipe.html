@@ -64,9 +64,10 @@
               </div>
 
               <div class="flex gap-4">
-                <img class="cursor-pointer" (click)="toggleEditModeForIngredient(ingredient)"
+                <img class="cursor-pointer w-6 h-6" (click)="toggleEditModeForIngredient(ingredient)"
                   [src]="ingredient.isEditMode ? 'img/Plus.svg' : 'img/edit.svg'" alt="edit">
-                <img class="cursor-pointer" (click)="deleteIngredient(ingredient)" src="img/delete.svg" alt="delete">
+                <img class="cursor-pointer  w-6 h-6" (click)="deleteIngredient(ingredient)" src="img/delete.svg"
+                  alt="delete">
               </div>
             </li>
             }

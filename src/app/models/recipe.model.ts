@@ -8,7 +8,7 @@ export interface RecipeRequirements {
   ingredients: Ingredient[];
   portionsAmount: number;
   cooksAmount: number;
-  cookingTime: 'quick' | 'medium' | 'complex';
+  cookingTime: string;
   cuisine: string;
   dietPreferences: string;
 }

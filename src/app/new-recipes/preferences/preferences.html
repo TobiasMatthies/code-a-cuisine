@@ -20,19 +20,21 @@
         <div>
           <h3>How many portions you need?</h3>
           <p class="flex gap-2 mt-5 items-center">
-            <img src="img/Minus.svg" alt="minus">
-            <span class="bg-green-light px-1 text-green-primary">2</span>
+            <img class="cursor-pointer" (click)="decreaseAmount('portionsAmount')" src="img/Minus.svg" alt="minus">
+            <span
+              class="bg-green-light px-1 text-green-primary">{{generateRecipeService.recipeRequirements.portionsAmount}}</span>
             Portions
-            <img src="img/Plus.svg" alt="plus">
+            <img class="cursor-pointer" (click)="increaseAmount('portionsAmount')" src="img/Plus.svg" alt="plus">
           </p>
         </div>
         <div>
           <h3>How many are cooking?</h3>
           <p class="flex gap-2 mt-5 items-center">
-            <img src="img/Minus.svg" alt="minus">
-            <span class="bg-green-light px-1 text-green-primary">2</span>
+            <img class="cursor-pointer" (click)="decreaseAmount('cooksAmount')" src="img/Minus.svg" alt="minus">
+            <span
+              class="bg-green-light px-1 text-green-primary">{{generateRecipeService.recipeRequirements.cooksAmount}}</span>
             Person
-            <img src="img/Plus.svg" alt="plus">
+            <img class="cursor-pointer" (click)="increaseAmount('cooksAmount')" src="img/Plus.svg" alt="plus">
           </p>
         </div>
       </div>
@@ -45,7 +47,11 @@
           </div>
           <div class="flex gap-5 mt-6">
             @for (time of preferences.times; track $index) {
-            <span class="px-3 py-1.5 bg-cream-light rounded-4xl text-green-primary">{{time | titlecase}}</span>
+            <button
+              [ngClass]="generateRecipeService.recipeRequirements.cookingTime === time ? 'bg-green-light' : 'bg-cream-light hover:bg-cream-primary'"
+              (click)="selectPreference('cookingTime', time)"
+              class="cursor-pointer px-3 py-1.5 bg-cream-light rounded-4xl text-green-primary">
+              {{time|titlecase}}</button>
             }
           </div>
         </div>
@@ -55,8 +61,11 @@
             <h3 class=" text-2xl font-semibold">Cuisine: </h3>
           </div>
           <div class="flex gap-5 mt-6">
-            @for (time of preferences.cuisine; track $index) {
-            <span class="px-3 py-1.5 bg-cream-light rounded-4xl text-green-primary">{{time | titlecase}}</span>
+            @for (cuisine of preferences.cuisine; track $index) {
+            <button (click)="selectPreference('cuisine', cuisine)"
+              [ngClass]="generateRecipeService.recipeRequirements.cuisine === cuisine ? 'bg-green-light' : 'bg-cream-light hover:bg-cream-primary'"
+              class="cursor-pointer px-3 py-1.5 bg-cream-light rounded-4xl text-green-primary">
+              {{cuisine | titlecase}}</button>
             }
           </div>
         </div>
@@ -66,8 +75,11 @@
             <h3 class=" text-2xl font-semibold">Diet Preferences: </h3>
           </div>
           <div class="flex gap-5 mt-6">
-            @for (time of preferences.dietPrefences; track $index) {
-            <span class="px-3 py-1.5 bg-cream-light rounded-4xl text-green-primary">{{time | titlecase}}</span>
+            @for (diet of preferences.dietPrefences; track $index) {
+            <button (click)="selectPreference('dietPreferences', diet)"
+              [ngClass]="generateRecipeService.recipeRequirements.dietPreferences === diet ? 'bg-green-light' : 'bg-cream-light hover:bg-cream-primary'"
+              class="cursor-pointer px-3 py-1.5 bg-cream-light rounded-4xl text-green-primary hover:bg-cream-primary">
+              {{diet | titlecase}}</button>
             }
           </div>
         </div>

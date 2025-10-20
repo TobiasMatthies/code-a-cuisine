@@ -50,8 +50,7 @@ export class GenerateRecipe {
         isEditMode: false,
       });
     }
-
-    console.log(this.generateRecipeService.recipeRequirements);
+    form.reset();
   }
 
   toggleEditModeForIngredient(ingredient: Ingredient) {

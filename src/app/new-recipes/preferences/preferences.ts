@@ -1,13 +1,14 @@
-import { TitleCasePipe } from '@angular/common';
+import { NgClass, TitleCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { GenerateRecipeService } from '../../services/generate-recipe.service';
 import { LoadingScreen } from '../loading-screen/loading-screen';
 
 @Component({
   selector: 'app-preferences',
-  imports: [RouterModule, TitleCasePipe, LoadingScreen],
+  imports: [RouterModule, TitleCasePipe, LoadingScreen, NgClass],
   templateUrl: './preferences.html',
-  styleUrl: './preferences.css'
+  styleUrl: './preferences.css',
 })
 export class Preferences {
   isLoading = false;
@@ -15,10 +16,29 @@ export class Preferences {
   preferences = {
     times: ['Quick', 'Medium', 'Complex'],
     cuisine: ['german', 'italian', 'indian', 'japanese', 'gourmet', 'fusion'],
-    dietPrefences: ['vegetarian', 'vegan', 'keto', 'no preferences']
-  }
+    dietPrefences: ['vegetarian', 'vegan', 'keto', 'no preferences'],
+  };
 
   onGenerateRecipe() {
-    this.isLoading = true
+    let requirements = this.generateRecipeService.recipeRequirements;
+    if (requirements.cookingTime && requirements.cuisine && requirements.dietPreferences) {
+      this.isLoading = true;
+    }
+  }
+
+  constructor(public generateRecipeService: GenerateRecipeService) {}
+
+  increaseAmount(key: 'portionsAmount' | 'cooksAmount') {
+    this.generateRecipeService.recipeRequirements[key]++;
+  }
+
+  decreaseAmount(key: 'portionsAmount' | 'cooksAmount') {
+    if (this.generateRecipeService.recipeRequirements[key] > 1) {
+      this.generateRecipeService.recipeRequirements[key]--;
+    }
+  }
+
+  selectPreference(key: 'cookingTime' | 'cuisine' | 'dietPreferences', value: string) {
+    this.generateRecipeService.recipeRequirements[key] = value;
   }
 }
