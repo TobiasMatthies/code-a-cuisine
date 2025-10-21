@@ -1,0 +1,49 @@
+<main class="bg-green-primary px-16 min-h-dvh w-full">
+  <div class="text-cream-primary max-w-[1440px] min-h-dvh m-auto">
+    <header class="w-full m-auto py-10">
+      <img src="img/Capa_2.svg" alt="logo" />
+    </header>
+
+    <div class="w-full flex justify-between mb-20">
+      <div>
+        <h1 class="text-5xl">The recipe results</h1>
+        <p class="my-6 text-2xl">
+          We took what you have and let our AI do the thinking. <br>
+          Here are 3 easy recipes you can make right now!
+        </p>
+
+        <div class="flex gap-4">
+          <span class="py-1.5 px-3 text-green-primary bg-cream-primary rounded-4xl">
+            {{generateRecipeService.recipeRequirements.cuisine}}
+          </span>
+          <span class="py-1.5 px-3 text-green-primary bg-cream-primary rounded-4xl">
+            {{generateRecipeService.recipeRequirements.cookingTime}}
+          </span>
+          @if (generateRecipeService.recipeRequirements.dietPreferences !== "no preferences") {
+          <span class="py-1.5 px-3 text-green-primary bg-cream-primary rounded-4xl">
+            {{generateRecipeService.recipeRequirements.dietPreferences}}
+          </span>
+          }
+        </div>
+      </div>
+      <img class="rounded-3xl" src="img/recipe-done.png" alt="recipe done">
+    </div>
+
+    <div class="flex justify-between gap-6">
+      @for (recipe of generateRecipeService.recipeResults; track $index) {
+      <div class="bg-cream-primary py-8 px-6 rounded-3xl text-green-dark flex-1 flex flex-col gap-4 items-start">
+        <div class="flex items-center gap-4">
+          <img src="img/icon.svg" alt="meal icon">
+          <span>Recipe {{$index + 1}}</span>
+        </div>
+        <h2 class="text-3xl font-semibold">{{recipe.title}}</h2>
+        <div class="flex gap-0.5">
+          <img src="img/Frame 750.svg" alt="cooking time icon">
+          <span>Cooking time: {{recipe.cookingTime}}</span>
+        </div>
+        <button class="bg-white text-green-text py-4 px-6 mt-8">View</button>
+      </div>
+      }
+    </div>
+  </div>
+</main>

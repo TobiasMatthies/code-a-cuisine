@@ -1,7 +1,7 @@
 import { NgClass, TitleCasePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { GenerateRecipeService } from '../../services/generate-recipe.service';
 import { LoadingScreen } from '../loading-screen/loading-screen';
 
@@ -27,19 +27,21 @@ export class Preferences {
       this.generateRecipeService.generateRecipe(requirements).subscribe({
         next: (response) => {
           console.log('Recipe generated successfully!', response);
-          // TODO: Handle success (e.g., navigate to the recipe page)
           this.isLoading = false;
+          this.router.navigate(['recipe-results/']);
         },
         error: (error) => {
           console.error('Error generating recipe:', error);
-          // TODO: Handle error (e.g., show an error message)
           this.isLoading = false;
         },
       });
     }
   }
 
-  constructor(public generateRecipeService: GenerateRecipeService) {}
+  constructor(
+    public generateRecipeService: GenerateRecipeService,
+    public router: Router,
+  ) {}
 
   increaseAmount(key: 'portionsAmount' | 'cooksAmount') {
     this.generateRecipeService.recipeRequirements[key]++;

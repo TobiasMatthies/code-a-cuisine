@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
+import { GeneratedRecipe } from '../models/generated-recipe.model';
 import { RecipeRequirements } from '../models/recipe.model';
 
 const webhookUrl = environment.webhookUrl;
@@ -18,9 +20,15 @@ export class GenerateRecipeService {
     dietPreferences: '',
   };
 
+  recipeResults: GeneratedRecipe[] = [];
+
   constructor(private http: HttpClient) {}
 
-  generateRecipe(requirements: RecipeRequirements) {
-    return this.http.post(webhookUrl, requirements);
+  generateRecipe(requirements: RecipeRequirements): Observable<GeneratedRecipe[]> {
+    const response = this.http.post<GeneratedRecipe[]>(webhookUrl, requirements);
+    response.subscribe((recipes) => {
+      this.recipeResults = recipes;
+    });
+    return response;
   }
 }
