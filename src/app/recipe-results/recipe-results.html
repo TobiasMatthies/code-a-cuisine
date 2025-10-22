@@ -26,7 +26,7 @@
           }
         </div>
       </div>
-      <img class="rounded-3xl" src="img/recipe-done.png" alt="recipe done">
+      <img class="rounded-3xl object-cover" src="img/recipe-done.png" alt="recipe done">
     </div>
 
     <div class="flex justify-between gap-6">
@@ -37,11 +37,11 @@
           <span>Recipe {{$index + 1}}</span>
         </div>
         <h2 class="text-3xl font-semibold">{{recipe.title}}</h2>
-        <div class="flex gap-0.5">
-          <img src="img/Frame 750.svg" alt="cooking time icon">
+        <div class="flex gap-0.5 flex-1">
+          <img class="w-6 h-6" src="img/Frame 750.svg" alt="cooking time icon">
           <span>Cooking time: {{recipe.cookingTime}}</span>
         </div>
-        <button class="bg-white text-green-text py-4 px-6 mt-8">View</button>
+        <button class="bg-white text-green-text py-4 px-6 mt-8 cursor-pointer">View</button>
       </div>
       }
     </div>
