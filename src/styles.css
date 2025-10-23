@@ -89,6 +89,8 @@
   --color-green-light: rgba(57, 96, 57, 0.30);
   --color-green-dark: #10310B;
   --color-cream-light: #FAF0E6CC;
+  --color-cream-border: #FAF0E6;
+  --color-cream-background: rgba(250, 240, 230, 0.30);
   --font-sans: 'Quicksand';
   --font-ubuntu: 'Ubuntu';
 }

@@ -1,1 +1,22 @@
-<p>recipe-detail works!</p>
+<main class="px-16 min-h-dvh">
+  <div class="text-green-primary max-w-[1440px] min-h-dvh m-auto">
+    <header class="w-full m-auto py-10">
+      <img src="img/Capa_2 (1).svg" alt="logo" />
+    </header>
+
+    <a class="flex gap-2.5" routerLink="/recipe-results">
+      <img src="img/Arrow 11.svg" alt="arrow back">
+      Recipe Results
+    </a>
+
+    <div class="border-cream-border border-4 rounded-3xl bg-cream-background px-12 py-10">
+      <div class="bg-cream-light">
+        <div class="flex gap-0.5 flex-1">
+          <img class="w-6 h-6" src="img/Frame 750.svg" alt="cooking time icon">
+          <span>Cooking time: {{selectedRecipe?.cookingTime}}</span>
+        </div>
+        <h1 class="font-semibold text-5xl">{{selectedRecipe?.title}}</h1>
+      </div>
+    </div>
+  </div>
+</main>
