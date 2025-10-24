@@ -10,12 +10,52 @@
     </a>
 
     <div class="border-cream-border border-4 rounded-3xl bg-cream-background px-12 py-10">
-      <div class="bg-cream-light">
-        <div class="flex gap-0.5 flex-1">
-          <img class="w-6 h-6" src="img/Frame 750.svg" alt="cooking time icon">
-          <span>Cooking time: {{selectedRecipe?.cookingTime}}</span>
+      <div class="bg-cream-light flex p-6">
+        <div class="max-w-[70%]">
+          <div class="flex gap-0.5 flex-1">
+            <img class="w-6 h-6" src="img/Frame 750.svg" alt="cooking time icon">
+            <span>Cooking time: {{selectedRecipe?.cookingTime}}</span>
+          </div>
+          <h1 class="font-semibold text-5xl">{{selectedRecipe?.title}}</h1>
         </div>
-        <h1 class="font-semibold text-5xl">{{selectedRecipe?.title}}</h1>
+
+        <div>
+          <div class="flex gap-4 items-center">
+            @if (selectedRecipe?.preferences?.dietPreferences !== "no preferences") {
+            <span class="py-1.5 px-3 rounded-4xl text-green-dark bg-green-light box-border inline-block">
+              {{selectedRecipe?.preferences?.dietPreferences}}
+            </span>
+            }
+            <span class="py-1.5 px-3 rounded-4xl text-green-dark bg-green-light box-border inline-block">
+              {{selectedRecipe?.preferences?.cuisine}}
+            </span>
+            <span class="py-1.5 px-3 rounded-4xl text-green-dark bg-green-light box-border flex items-center">
+              <img src="img/favorite.svg" alt="heart">
+              66
+            </span>
+          </div>
+          <div>
+            <h5>Nutritional information</h5>
+            <div class="flex">
+              <div>
+                <p>Energy</p>
+                <p>{{selectedRecipe?.nutritionalInformation?.calories}}</p>
+              </div>
+              <div>
+                <p>Protein</p>
+                <p>{{selectedRecipe?.nutritionalInformation?.proteins}}</p>
+              </div>
+              <div>
+                <p>Fat</p>
+                <p>{{selectedRecipe?.nutritionalInformation?.fats}}</p>
+              </div>
+              <div>
+                <p>Carbs</p>
+                <p>{{selectedRecipe?.nutritionalInformation?.carbs}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
