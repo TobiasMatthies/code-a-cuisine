@@ -1,0 +1,4 @@
+.direction-item {
+  flex: 0 0 calc((100% - 64px) / 2);
+  box-sizing: border-box;
+}

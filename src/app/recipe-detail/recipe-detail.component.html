@@ -4,22 +4,22 @@
       <img src="img/Capa_2 (1).svg" alt="logo" />
     </header>
 
-    <a class="flex gap-2.5" routerLink="/recipe-results">
+    <a class="flex gap-2.5 mb-16" routerLink="/recipe-results">
       <img src="img/Arrow 11.svg" alt="arrow back">
       Recipe Results
     </a>
 
     <div class="border-cream-border border-4 rounded-3xl bg-cream-background px-12 py-10">
-      <div class="bg-cream-light flex p-6">
+      <div class="bg-cream-light flex p-6 rounded-3xl mb-12">
         <div class="max-w-[70%]">
-          <div class="flex gap-0.5 flex-1">
+          <div class="flex gap-0.5 flex-1 mb-2">
             <img class="w-6 h-6" src="img/Frame 750.svg" alt="cooking time icon">
             <span>Cooking time: {{selectedRecipe?.cookingTime}}</span>
           </div>
           <h1 class="font-semibold text-5xl">{{selectedRecipe?.title}}</h1>
         </div>
 
-        <div>
+        <div class="flex flex-col gap-6">
           <div class="flex gap-4 items-center">
             @if (selectedRecipe?.preferences?.dietPreferences !== "no preferences") {
             <span class="py-1.5 px-3 rounded-4xl text-green-dark bg-green-light box-border inline-block">
@@ -34,29 +34,96 @@
               66
             </span>
           </div>
-          <div>
+          <div class="text-green-dark">
             <h5>Nutritional information</h5>
-            <div class="flex">
+            <div class="flex gap-6">
               <div>
-                <p>Energy</p>
+                <p class="text-2xl font-semibold">Energy</p>
                 <p>{{selectedRecipe?.nutritionalInformation?.calories}}</p>
               </div>
               <div>
-                <p>Protein</p>
+                <p class="text-2xl font-semibold">Protein</p>
                 <p>{{selectedRecipe?.nutritionalInformation?.proteins}}</p>
               </div>
               <div>
-                <p>Fat</p>
+                <p class="text-2xl font-semibold">Fat</p>
                 <p>{{selectedRecipe?.nutritionalInformation?.fats}}</p>
               </div>
               <div>
-                <p>Carbs</p>
+                <p class="text-2xl font-semibold">Carbs</p>
                 <p>{{selectedRecipe?.nutritionalInformation?.carbs}}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <div>
+        <div class="relative">
+          <img src="img/Hero Directions.png" alt="directions" class="w-full">
+          <h2 class="font-semibold text-3xl absolute left-1/2 top-1/2 -translate-1/2">Ingredients</h2>
+        </div>
+
+        <div class="flex justify-center gap-20">
+          <div class="min-w-1/4 max-w-1/3">
+            <h5 class="text-green-text text-2xl font-semibold mb-6">Your ingredients</h5>
+            <ul class="text-2xl font-medium text-green-dark">
+              @for (ingredient of selectedRecipe?.ingredients?.yourIngredients; track $index) {
+              <li><span class="mr-3">{{ingredient.servingSize}}</span> {{ingredient.ingredient}}</li>
+              }
+            </ul>
+          </div>
+
+          <div class="min-w-1/4 max-w-1/3">
+            <h5 class="text-green-text text-2xl font-semibold mb-6">Extra ingredients</h5>
+            <ul class="text-2xl font-medium text-green-dark">
+              @for (ingredient of selectedRecipe?.ingredients?.extraIngredients; track $index) {
+              <li><span class="mr-3">{{ingredient.servingSize}}</span> {{ingredient.ingredient}}</li>
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <img src="img/Hero for silgle recipe view.png" alt="directions" class="w-full">
+        <div class="flex flex-wrap justify-between gap-y-10 mt-6">
+          @for (direction of selectedRecipe?.directions; track $index) {
+          <div class="direction-item">
+            <div class="flex justify-between">
+              <h5 class="font-medium text-2xl flex items-center text-green-dark">
+                <span
+                  class="bg-cream-light rounded-full h-10 w-10 flex items-center justify-center text-center mr-1 font-normal">
+                  {{$index+1}}
+                </span>
+                {{direction.title}}
+              </h5>
+              <div class="bg-green-light rounded-md flex gap-1 justify-center items-center py-0.5 px-1">
+                <img src="img/chef1.svg" alt="chef">
+                <span>Chef {{direction.cook}}</span>
+              </div>
+            </div>
+
+            <p class="mt-8 font-medium">{{direction.description}}</p>
+          </div>
+          }
+        </div>
+      </div>
+      <div class="flex mt-16 justify-center items-center">
+        <span class="font-bold mr-1 text-2xl text-green-dark">Just finished this meal?</span>
+        <span>Give it a heart, so that the others know this is delicious</span>
+        <img class="ml-6 h-12" src="img/favorite.svg" alt="heart">
+      </div>
     </div>
+
+    <footer class="bg-green-light flex justify-center items-center gap-8 py-10 mt-14 rounded-3xl">
+      <span class="font-semibold text-2xl text-green-dark">Find inspiration for your next culinary adventure!</span>
+      <a routerLink="/cookbook" class="bg-green-primary text-white py-4 px-7">Cookbook</a>
+    </footer>
+
+    <a routerLink="/generate-recipe" class="float-right text-2xl flex gap-2.5 items-center my-16">
+      <span class="font-medium text-xl">Generate new recipe</span>
+      <img class="-scale-x-100" src="img/Arrow 11.svg" alt="arrow">
+    </a>
   </div>
 </main>
