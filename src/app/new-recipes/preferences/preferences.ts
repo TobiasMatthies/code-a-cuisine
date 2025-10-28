@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { GenerateRecipeService } from '../../services/generate-recipe.service';
+import { StateService } from '../../services/state.service';
 import { LoadingScreen } from '../loading-screen/loading-screen';
 
 @Component({
@@ -13,12 +14,7 @@ import { LoadingScreen } from '../loading-screen/loading-screen';
 })
 export class Preferences {
   isLoading = false;
-
-  preferences = {
-    times: ['Quick', 'Medium', 'Complex'],
-    cuisine: ['german', 'italian', 'indian', 'japanese', 'gourmet', 'fusion'],
-    dietPrefences: ['vegetarian', 'vegan', 'keto', 'no preferences'],
-  };
+  preferences;
 
   onGenerateRecipe() {
     const requirements = this.generateRecipeService.recipeRequirements;
@@ -41,7 +37,10 @@ export class Preferences {
   constructor(
     public generateRecipeService: GenerateRecipeService,
     public router: Router,
-  ) {}
+    public state: StateService,
+  ) {
+    this.preferences = state.preferences;
+  }
 
   increaseAmount(key: 'portionsAmount' | 'cooksAmount') {
     this.generateRecipeService.recipeRequirements[key]++;

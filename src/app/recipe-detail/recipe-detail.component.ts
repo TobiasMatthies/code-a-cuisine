@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { GeneratedRecipe } from '../models/generated-recipe.model';
 import { GenerateRecipeService } from '../services/generate-recipe.service';
+import { StateService } from '../services/state.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -15,6 +16,7 @@ export class RecipeDetailComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private generateRecipeService: GenerateRecipeService,
+    private state: StateService,
   ) {}
 
   ngOnInit(): void {
@@ -22,7 +24,7 @@ export class RecipeDetailComponent implements OnInit {
 
     if (routeIndex) {
       let recipeIndex = parseInt(routeIndex);
-      this.selectedRecipe = this.generateRecipeService.recipeResults[recipeIndex];
+      this.selectedRecipe = this.state.recipeResults[recipeIndex];
       console.log(this.selectedRecipe);
     }
   }

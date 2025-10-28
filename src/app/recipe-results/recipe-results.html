@@ -1,7 +1,9 @@
 <main class="bg-green-primary px-16 min-h-dvh w-full">
   <div class="text-cream-primary max-w-[1440px] min-h-dvh m-auto">
     <header class="w-full m-auto py-10">
-      <img src="img/Capa_2.svg" alt="logo" />
+      <a routerLink="/generate-recipe">
+        <img src="img/Capa_2.svg" alt="logo" />
+      </a>
     </header>
 
     <div class="w-full flex justify-between mb-20">
@@ -30,7 +32,7 @@
     </div>
 
     <div class="flex justify-between gap-6">
-      @for (recipe of generateRecipeService.recipeResults; track $index) {
+      @for (recipe of state.recipeResults; track $index) {
       <div class="bg-cream-primary py-8 px-6 rounded-3xl text-green-dark flex-1 flex flex-col gap-4 items-start">
         <div class="flex items-center gap-4">
           <img src="img/icon.svg" alt="meal icon">
