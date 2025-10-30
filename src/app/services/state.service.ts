@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GeneratedRecipe } from '../models/generated-recipe.model';
+import { FirebaseService } from './firebase-recipe.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,4 +20,10 @@ export class StateService {
     ],
     dietPrefences: ['vegetarian', 'vegan', 'keto', 'no preferences'],
   };
+
+  constructor(private firebaseService: FirebaseService) {
+    this.firebaseService.getAllRecipes().subscribe((recipes) => {
+      this.allRecipes = recipes;
+    });
+  }
 }

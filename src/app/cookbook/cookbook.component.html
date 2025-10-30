@@ -9,13 +9,39 @@
             Recipe Results
         </a>
 
-        <div>
-            <h1 class="text-6xl font-bold">Cookbook</h1>
-            <p class="mb-4 text-2xl">From quick bites to gourmet delights, explore them all in our ultimate cookbook and
-                get
-                inspired for your
-                next culinary
-                adventure.</p>
+        <div class="bg-green-opaque py-10 px-6 flex">
+            <div class="w-1/3">
+                <h1 class="text-6xl font-bold">Cookbook</h1>
+                <p class="mb-4 text-2xl">From quick bites to gourmet delights, explore them all in our ultimate cookbook
+                    and
+                    get
+                    inspired for your
+                    next culinary
+                    adventure.</p>
+            </div>
+
+            <div>
+                <h3 class="font-semibold text-2xl">Most liked recipes <img src="img/favorite.svg" alt="Heart"></h3>
+                <div class="flex gap-6">
+                    @for (recipe of state.allRecipes.slice(0, 3); track $index) {
+                    <a routerLink="/" class="bg-grey-opaque py-4 px-3">
+                        <div>
+                            <p>
+                                <img src="img/Frame 750.svg" alt="clock">
+                                Cooking time: {{recipe.cookingTime}}
+                            </p>
+
+                            <h5>{{recipe.title}}</h5>
+                        </div>
+
+                        <span>
+                            <img src="img/favorite.svg" alt="heart">
+                            66
+                        </span>
+                    </a>
+                    }
+                </div>
+            </div>
         </div>
 
         <div class="grid grid-cols-3 gap-x-[60px] gap-y-14">

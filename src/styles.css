@@ -87,6 +87,8 @@
   --color-green-text: #008000;
   --color-cream-primary: #F5F5DC;
   --color-green-light: rgba(57, 96, 57, 0.30);
+  --color-green-opaque: rgba(57, 96, 57, 0.04);
+  --color-grey-opaque: rgba(219, 224, 219, 0.70);
   --color-green-dark: #10310B;
   --color-cream-light: #FAF0E6CC;
   --color-cream-border: #FAF0E6;

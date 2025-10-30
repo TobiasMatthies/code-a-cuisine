@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { GeneratedRecipe } from '../models/generated-recipe.model';
-import { StateService } from './state.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FirebaseService implements OnInit {
+export class FirebaseService {
   BASE_URL = environment.databaseUrl;
 
   saveResultsToCookbook(recipes: GeneratedRecipe[]) {
@@ -17,14 +16,9 @@ export class FirebaseService implements OnInit {
     }
   }
 
-  constructor(
-    private state: StateService,
-    private http: HttpClient,
-  ) {}
-
-  ngOnInit(): void {
-    this.http.get<GeneratedRecipe[]>(this.BASE_URL + 'recipes.json').subscribe((recipes) => {
-      this.state.allRecipes = recipes;
-    });
+  getAllRecipes() {
+    return this.http.get<GeneratedRecipe[]>(this.BASE_URL + 'recipes.json');
   }
+
+  constructor(private http: HttpClient) {}
 }
