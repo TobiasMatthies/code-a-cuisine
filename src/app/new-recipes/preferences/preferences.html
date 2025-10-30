@@ -62,10 +62,10 @@
           </div>
           <div class="flex gap-5 mt-6">
             @for (cuisine of preferences.cuisine; track $index) {
-            <button (click)="selectPreference('cuisine', cuisine)"
-              [ngClass]="generateRecipeService.recipeRequirements.cuisine === cuisine ? 'bg-green-light' : 'bg-cream-light hover:bg-cream-primary'"
+            <button (click)="selectPreference('cuisine', cuisine.name)"
+              [ngClass]="generateRecipeService.recipeRequirements.cuisine === cuisine.name ? 'bg-green-light' : 'bg-cream-light hover:bg-cream-primary'"
               class="cursor-pointer px-3 py-1.5 bg-cream-light rounded-4xl text-green-primary">
-              {{cuisine | titlecase}}</button>
+              {{cuisine.name | titlecase}}</button>
             }
           </div>
         </div>
