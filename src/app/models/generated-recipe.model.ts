@@ -42,3 +42,7 @@ export interface Direction {
   description: string;
   cook: number;
 }
+
+export interface Recipe extends GeneratedRecipe {
+  id: string;
+}

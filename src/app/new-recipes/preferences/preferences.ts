@@ -2,6 +2,8 @@ import { NgClass, TitleCasePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { switchMap, tap } from 'rxjs';
+import { FirebaseService } from '../../services/firebase-recipe.service';
 import { GenerateRecipeService } from '../../services/generate-recipe.service';
 import { StateService } from '../../services/state.service';
 import { LoadingScreen } from '../loading-screen/loading-screen';
@@ -20,17 +22,30 @@ export class Preferences {
     const requirements = this.generateRecipeService.recipeRequirements;
     if (requirements.cookingTime && requirements.cuisine && requirements.dietPreferences) {
       this.isLoading = true;
-      this.generateRecipeService.generateRecipe(requirements).subscribe({
-        next: (response) => {
-          console.log('Recipe generated successfully!', response);
-          this.isLoading = false;
-          this.router.navigate(['recipe-results/']);
-        },
-        error: (error) => {
-          console.error('Error generating recipe:', error);
-          this.isLoading = false;
-        },
-      });
+      this.generateRecipeService
+        .generateRecipe(requirements)
+        .pipe(
+          tap((recipes) => {
+            this.state.recipeResults = recipes;
+            console.log('Generated recipes:', this.state.recipeResults);
+          }),
+          switchMap((recipes) => this.firebaseService.saveRecipesToCookbook(recipes)),
+          switchMap(() => this.firebaseService.getAllRecipes()),
+          tap((databaseRecipes) => {
+            this.state.allRecipes = databaseRecipes;
+            console.log('All recipes from DB:', this.state.allRecipes);
+          }),
+        )
+        .subscribe({
+          next: () => {
+            this.isLoading = false;
+            this.router.navigate(['recipe-results/']);
+          },
+          error: (error) => {
+            console.error('Error in recipe generation flow:', error);
+            this.isLoading = false;
+          },
+        });
     }
   }
 
@@ -38,6 +53,7 @@ export class Preferences {
     public generateRecipeService: GenerateRecipeService,
     public router: Router,
     public state: StateService,
+    private firebaseService: FirebaseService,
   ) {
     this.preferences = state.preferences;
   }
