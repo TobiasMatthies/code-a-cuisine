@@ -27,13 +27,11 @@ export class Preferences {
         .pipe(
           tap((recipes) => {
             this.state.recipeResults = recipes;
-            console.log('Generated recipes:', this.state.recipeResults);
           }),
           switchMap((recipes) => this.firebaseService.saveRecipesToCookbook(recipes)),
           switchMap(() => this.firebaseService.getAllRecipes()),
           tap((databaseRecipes) => {
             this.state.allRecipes = databaseRecipes;
-            console.log('All recipes from DB:', this.state.allRecipes);
           }),
         )
         .subscribe({
