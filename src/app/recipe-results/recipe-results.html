@@ -43,7 +43,7 @@
           <img class="w-6 h-6" src="img/Frame 750.svg" alt="cooking time icon">
           <span>Cooking time: {{recipe.cookingTime}}</span>
         </div>
-        <a [routerLink]="['/recipe-results', $index]"
+        <a [routerLink]="['/recipe-results', recipe.id]"
           class="bg-white text-green-text py-4 px-6 mt-8 cursor-pointer">View</a>
       </div>
       }

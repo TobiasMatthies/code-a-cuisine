@@ -2,7 +2,7 @@ import { NgClass, TitleCasePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { switchMap, tap } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 import { FirebaseService } from '../../services/firebase-recipe.service';
 import { GenerateRecipeService } from '../../services/generate-recipe.service';
 import { StateService } from '../../services/state.service';
@@ -25,13 +25,15 @@ export class Preferences {
       this.generateRecipeService
         .generateRecipe(requirements)
         .pipe(
-          tap((recipes) => {
-            this.state.recipeResults = recipes;
-          }),
-          switchMap((recipes) => this.firebaseService.saveRecipesToCookbook(recipes)),
-          switchMap(() => this.firebaseService.getAllRecipes()),
-          tap((databaseRecipes) => {
-            this.state.allRecipes = databaseRecipes;
+          switchMap((generatedRecipes) => {
+            return this.firebaseService.saveRecipesToCookbook(generatedRecipes).pipe(
+              map((firebaseResponses: { name: string }[]) => {
+                const recipesWithIds = generatedRecipes.map((recipe, index) => {
+                  return { ...recipe, id: firebaseResponses[index].name };
+                });
+                this.state.recipeResults = recipesWithIds;
+              }),
+            );
           }),
         )
         .subscribe({

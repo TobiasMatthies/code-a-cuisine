@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { GeneratedRecipe, Recipe } from '../models/generated-recipe.model';
+import { Recipe } from '../models/generated-recipe.model';
 import { FirebaseService } from './firebase-recipe.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StateService {
-  recipeResults: GeneratedRecipe[] = [];
-  allRecipes: Recipe[] = [];
+  recipeResults: Recipe[] = [];
+  currentRecipes: Recipe[] = [];
   preferences = {
     times: ['Quick', 'Medium', 'Complex'],
     cuisine: [
@@ -22,9 +22,15 @@ export class StateService {
   };
 
   constructor(private firebaseService: FirebaseService) {
-    this.firebaseService.getAllRecipes().subscribe((recipes) => {
-      this.allRecipes = recipes;
+    this.firebaseService.getFirstThreeRecipes().subscribe((recipes) => {
+      this.currentRecipes = recipes;
       console.log(recipes);
+    });
+  }
+
+  loadRecipesByCuisine(cuisine: string) {
+    this.firebaseService.getRecipesByCuisine(cuisine).subscribe((recipes) => {
+      this.currentRecipes = recipes;
     });
   }
 }

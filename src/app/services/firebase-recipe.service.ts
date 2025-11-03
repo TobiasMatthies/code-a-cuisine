@@ -12,13 +12,30 @@ export class FirebaseService {
 
   saveRecipesToCookbook(recipes: GeneratedRecipe[]): Observable<any[]> {
     const saveObservables = recipes.map((recipe) => {
-      return this.http.post(this.BASE_URL + 'recipes.json', recipe);
+      const recipeWithCuisine = { ...recipe, cuisine: recipe.preferences.cuisine };
+      return this.http.post(this.BASE_URL + 'recipes.json', recipeWithCuisine);
     });
     return forkJoin(saveObservables);
   }
 
-  getAllRecipes(): Observable<Recipe[]> {
-    return this.http.get<{ [key: string]: GeneratedRecipe }>(this.BASE_URL + 'recipes.json').pipe(
+  getRecipesByCuisine(cuisine: string): Observable<Recipe[]> {
+    const url = `${this.BASE_URL}recipes.json?orderBy="cuisine"&equalTo="${cuisine}"`;
+    return this.http.get<{ [key: string]: GeneratedRecipe }>(url).pipe(
+      map((response) => {
+        const recipes: Recipe[] = [];
+        for (const key in response) {
+          if (response.hasOwnProperty(key)) {
+            recipes.push({ ...response[key], id: key });
+          }
+        }
+        return recipes;
+      }),
+    );
+  }
+
+  getFirstThreeRecipes(): Observable<Recipe[]> {
+    const url = `${this.BASE_URL}recipes.json?orderBy="$key"&limitToFirst=3`;
+    return this.http.get<{ [key: string]: GeneratedRecipe }>(url).pipe(
       map((response) => {
         const recipes: Recipe[] = [];
         for (const key in response) {

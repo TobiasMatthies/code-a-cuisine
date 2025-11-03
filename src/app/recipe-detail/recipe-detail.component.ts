@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { GeneratedRecipe } from '../models/generated-recipe.model';
+import { Recipe } from '../models/generated-recipe.model';
 import { GenerateRecipeService } from '../services/generate-recipe.service';
 import { StateService } from '../services/state.service';
 
@@ -11,7 +11,7 @@ import { StateService } from '../services/state.service';
   styleUrl: './recipe-detail.component.css',
 })
 export class RecipeDetailComponent implements OnInit {
-  selectedRecipe: GeneratedRecipe | null = null;
+  selectedRecipe: Recipe | null = null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -20,12 +20,10 @@ export class RecipeDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let routeIndex = this.activatedRoute.snapshot.paramMap.get('id');
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    let recipeFound = this.state.recipeResults.find((recipe) => id == recipe.id);
 
-    if (routeIndex) {
-      let recipeIndex = parseInt(routeIndex);
-      this.selectedRecipe = this.state.recipeResults[recipeIndex];
-      console.log(this.selectedRecipe);
-    }
+    if (recipeFound) this.selectedRecipe = recipeFound;
+    console.log(this.selectedRecipe);
   }
 }

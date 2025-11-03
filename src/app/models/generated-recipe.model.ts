@@ -6,6 +6,7 @@ export interface GeneratedRecipe {
   cooksAmount: number;
   ingredients: Ingredients;
   directions: Direction[];
+  cuisine?: string;
 }
 
 export interface NutritionalInformation {

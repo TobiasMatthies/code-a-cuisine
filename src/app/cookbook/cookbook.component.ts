@@ -10,6 +10,6 @@ import { StateService } from '../services/state.service';
 })
 export class CookbookComponent {
   constructor(public state: StateService) {
-    console.log(state.allRecipes);
+    console.log(state.currentRecipes);
   }
 }
