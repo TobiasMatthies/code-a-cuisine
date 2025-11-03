@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { CookbookComponent } from './cookbook/cookbook.component';
+import { CookbookComponent } from './all-recipes/cookbook/cookbook.component';
 import { GenerateRecipe } from './new-recipes/generate-recipe/generate-recipe';
 import { Preferences } from './new-recipes/preferences/preferences';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';

@@ -31,7 +31,7 @@ export class Preferences {
                 const recipesWithIds = generatedRecipes.map((recipe, index) => {
                   return { ...recipe, id: firebaseResponses[index].name };
                 });
-                this.state.recipeResults = recipesWithIds;
+                this.state.currentRecipes = recipesWithIds;
               }),
             );
           }),

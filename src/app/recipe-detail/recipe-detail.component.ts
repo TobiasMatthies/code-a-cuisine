@@ -21,7 +21,7 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
-    let recipeFound = this.state.recipeResults.find((recipe) => id == recipe.id);
+    let recipeFound = this.state.currentRecipes.find((recipe) => id == recipe.id);
 
     if (recipeFound) this.selectedRecipe = recipeFound;
     console.log(this.selectedRecipe);

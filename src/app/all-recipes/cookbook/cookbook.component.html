@@ -23,7 +23,7 @@
                         src="img/favorite.svg" alt="Heart"></h3>
                 <div class="flex gap-6 rounded-2xl">
                     @for (recipe of state.currentRecipes; track $index) {
-                    <a routerLink="/"
+                    <a [routerLink]="['/recipe-results', recipe.id]"
                         class="bg-grey-opaque py-4 px-3 flex items-start gap-6 rounded-2xl flex-1 min-w-96">
                         <div>
                             <p class="flex text-base gap-1 items-center">
@@ -48,7 +48,7 @@
             @for (cuisine of state.preferences.cuisine; track $index) {
             <figure>
                 <figcaption class="text-3xl font-semibold">{{cuisine.name}} {{cuisine.emoji}}</figcaption>
-                <img class="w-full" [src]="cuisine.img" alt="cuisine">
+                <img class="w-full" [src]="cuisine.thumbnail_img" alt="cuisine">
             </figure>
             }
         </div>
