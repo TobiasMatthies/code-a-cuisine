@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Cuisine } from '../../models/cuisine.model';
 import { FirebaseService } from '../../services/firebase-recipe.service';
 import { StateService } from '../../services/state.service';
 
@@ -16,14 +17,21 @@ export class RecipesList implements OnInit {
     private route: ActivatedRoute,
   ) {}
 
-  ngOnInit(): void {
-    let cuisine = this.route.snapshot.queryParamMap.get('cuisine');
+  cuisine: Cuisine | null = null;
 
-    if (cuisine) {
-      this.firebaseService.getRecipesByCuisine(cuisine).subscribe((recipes) => {
+  ngOnInit(): void {
+    let cuisineName = this.route.snapshot.queryParamMap.get('cuisine');
+
+    if (cuisineName) {
+      this.firebaseService.getRecipesByCuisine(cuisineName).subscribe((recipes) => {
         this.state.selectedRecipes = recipes;
         console.log(recipes);
       });
+    }
+
+    let cuisineFound = this.state.preferences.cuisine.find((c) => c.name == cuisineName);
+    if (cuisineFound) {
+      this.cuisine = cuisineFound;
     }
   }
 }

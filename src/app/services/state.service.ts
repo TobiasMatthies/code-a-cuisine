@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Cuisine } from '../models/cuisine.model';
 import { Recipe } from '../models/generated-recipe.model';
 import { FirebaseService } from './firebase-recipe.service';
 
@@ -8,7 +9,7 @@ import { FirebaseService } from './firebase-recipe.service';
 export class StateService {
   selectedRecipes: Recipe[] = [];
   currentRecipes: Recipe[] = [];
-  preferences = {
+  preferences: { times: string[]; cuisine: Cuisine[]; dietPrefences: string[] } = {
     times: ['Quick', 'Medium', 'Complex'],
     cuisine: [
       {

@@ -4,6 +4,8 @@
             <img src="img/Capa_2 (1).svg" alt="logo" />
         </header>
 
+        <img [src]="cuisine?.header_img" alt="header">
+
         <div>
             @for (recipe of state.selectedRecipes; track $index) {
             <p class="text-green-primary">{{recipe.title}}</p>
