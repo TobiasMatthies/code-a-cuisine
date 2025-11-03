@@ -46,10 +46,12 @@
 
         <div class="grid grid-cols-3 gap-x-[60px] gap-y-14">
             @for (cuisine of state.preferences.cuisine; track $index) {
-            <figure>
-                <figcaption class="text-3xl font-semibold">{{cuisine.name}} {{cuisine.emoji}}</figcaption>
-                <img class="w-full" [src]="cuisine.thumbnail_img" alt="cuisine">
-            </figure>
+            <a [routerLink]="['/recipes-list']" [queryParams]="{ cuisine: cuisine.name }">
+                <figure>
+                    <figcaption class="text-3xl font-semibold">{{cuisine.name}} {{cuisine.emoji}}</figcaption>
+                    <img class="w-full" [src]="cuisine.thumbnail_img" alt="cuisine">
+                </figure>
+            </a>
             }
         </div>
 

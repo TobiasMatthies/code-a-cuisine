@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { CookbookComponent } from './all-recipes/cookbook/cookbook.component';
+import { RecipesList } from './all-recipes/recipes-list/recipes-list';
 import { GenerateRecipe } from './new-recipes/generate-recipe/generate-recipe';
 import { Preferences } from './new-recipes/preferences/preferences';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
@@ -30,5 +31,9 @@ export const routes: Routes = [
   {
     path: 'cookbook',
     component: CookbookComponent,
+  },
+  {
+    path: 'recipes-list',
+    component: RecipesList,
   },
 ];
