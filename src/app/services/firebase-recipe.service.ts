@@ -48,5 +48,14 @@ export class FirebaseService {
     );
   }
 
+  loadRecipeById(id: string): Observable<Recipe> {
+    const url = `${this.BASE_URL}recipes/${id}.json`;
+    return this.http.get<RecipeInDatabase>(url).pipe(
+      map((response) => {
+        return { ...response, id: id };
+      }),
+    );
+  }
+
   constructor(private http: HttpClient) {}
 }
