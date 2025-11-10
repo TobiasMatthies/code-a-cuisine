@@ -15,13 +15,13 @@ export class StateService {
       {
         name: 'german',
         thumbnail_img: 'img/category-thumbnails/card-4.png',
-        header_img: 'img/category-headers/Property 1=Fusion.png',
+        header_img: 'img/category-headers/Property 1=German.png',
         emoji: '🥨',
       },
       {
         name: 'italian',
         thumbnail_img: 'img/category-thumbnails/card-5.png',
-        header_img: 'img/category-headers/Property 1=Fusion.png',
+        header_img: 'img/category-headers/Property 1=Italian.png',
         emoji: '🤌',
       },
       {
@@ -33,13 +33,13 @@ export class StateService {
       {
         name: 'japanese',
         thumbnail_img: 'img/category-thumbnails/card-3.png',
-        header_img: 'img/category-headers/Property 1=Fusion.png',
+        header_img: 'img/category-headers/Property 1=Japanese.png',
         emoji: '🥢',
       },
       {
         name: 'gourmet',
         thumbnail_img: 'img/category-thumbnails/card-2.png',
-        header_img: 'img/category-headers/Property 1=Fusion.png',
+        header_img: 'img/category-headers/Property 1=Gourmet.png',
         emoji: '✨',
       },
       {
