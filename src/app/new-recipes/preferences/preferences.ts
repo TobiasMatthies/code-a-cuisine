@@ -29,7 +29,7 @@ export class Preferences {
             return this.firebaseService.saveRecipesToCookbook(generatedRecipes).pipe(
               map((firebaseResponses: { name: string }[]) => {
                 const recipesWithIds = generatedRecipes.map((recipe, index) => {
-                  return { ...recipe, id: firebaseResponses[index].name };
+                  return { ...recipe, id: firebaseResponses[index].name, likes: 0 };
                 });
                 this.state.currentRecipes = recipesWithIds;
               }),

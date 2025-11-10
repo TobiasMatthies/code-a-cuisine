@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { GeneratedRecipe, Recipe } from '../models/generated-recipe.model';
+import { GeneratedRecipe, Recipe, RecipeInDatabase } from '../models/generated-recipe.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,15 +12,15 @@ export class FirebaseService {
 
   saveRecipesToCookbook(recipes: GeneratedRecipe[]): Observable<any[]> {
     const saveObservables = recipes.map((recipe) => {
-      const recipeWithCuisine = { ...recipe, cuisine: recipe.preferences.cuisine };
-      return this.http.post(this.BASE_URL + 'recipes.json', recipeWithCuisine);
+      const recipeWithCuisine = { ...recipe, cuisine: recipe.preferences.cuisine, likes: 0 };
+      return this.http.post<RecipeInDatabase>(this.BASE_URL + 'recipes.json', recipeWithCuisine);
     });
     return forkJoin(saveObservables);
   }
 
   getRecipesByCuisine(cuisine: string): Observable<Recipe[]> {
     const url = `${this.BASE_URL}recipes.json?orderBy="cuisine"&equalTo="${cuisine}"`;
-    return this.http.get<{ [key: string]: GeneratedRecipe }>(url).pipe(
+    return this.http.get<{ [key: string]: RecipeInDatabase }>(url).pipe(
       map((response) => {
         const recipes: Recipe[] = [];
         for (const key in response) {
@@ -35,7 +35,7 @@ export class FirebaseService {
 
   getFirstThreeRecipes(): Observable<Recipe[]> {
     const url = `${this.BASE_URL}recipes.json?orderBy="$key"&limitToFirst=3`;
-    return this.http.get<{ [key: string]: GeneratedRecipe }>(url).pipe(
+    return this.http.get<{ [key: string]: RecipeInDatabase }>(url).pipe(
       map((response) => {
         const recipes: Recipe[] = [];
         for (const key in response) {

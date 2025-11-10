@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Cuisine } from '../../models/cuisine.model';
 import { FirebaseService } from '../../services/firebase-recipe.service';
 import { StateService } from '../../services/state.service';
 
 @Component({
   selector: 'app-recipes-list',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './recipes-list.html',
   styleUrl: './recipes-list.css',
 })
