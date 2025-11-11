@@ -11,7 +11,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        0,
+        -432,
         0
       ],
       "id": "46be85c7-d869-4787-9a8e-c77715c91dfc",
@@ -21,13 +21,13 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=You are part of a workflow of an application that lets you enter the ingredients you have at home and generates recipes based on those ingredients and preferences.\nYour task is:\n- to recieve all ingredients and preferences\n- to generate exactly three recipes based on this data. They should be based on the ingredients the user has at home but can add other ingredients to improve the recipes. ingredients at home and extra ingredients should be returned as seperate fields.\n- return all three in json format\n\nEach recipe-json should include the following key-value pairs:\n- title: the name of the recipe\n- cookingTime: time to prepare this recipe\n- nutritionalInformation: values for calories, proteins, fats and carbs\n- preferences: a list of all the preferences given (cookingTime, cuisine, dietPreferences). If not value is given for one these do not return a value for this specific option\n- cooksAmount: amount of cooks\n- ingredients: a json containing two other jsons with the keys \"yourIngredients\" and \"extraIngredients\". The ingredients in this field should have the same data-format as given in the input-data, except for the \"isEditMode\"-flag.\n- directions: a json containing each step as a seperate json with these fields: order, title, description, cook (number indicating which cook should do this step, based on \"cooksAmount\")\n\nMAKE SURE THAT THE RECIPES ALWAYS FOLLOW THIS EXACT STRUCTURE. RETURN A JSON CONTAINING ONLY THESE THREE RECIPES WITHOUT ANY OTHER DATA OR TEXT!\n\nRecipe-data:\n\n{{ JSON.stringify($json.body) }}",
+        "text": "=You are part of a workflow of an application that lets you enter the ingredients you have at home and generates recipes based on those ingredients and preferences.\nYour task is:\n- to recieve all ingredients and preferences\n- to generate exactly three recipes based on this data. They should be based on the ingredients the user has at home but can add other ingredients to improve the recipes. ingredients at home and extra ingredients should be returned as seperate fields.\n- return all three in json format\n\nEach recipe-json should include the following key-value pairs:\n- title: the name of the recipe\n- cookingTime: time to prepare this recipe\n- nutritionalInformation: values for calories, proteins, fats and carbs\n- preferences: a list of all the preferences given (cookingTime, cuisine, dietPreferences). If not value is given for one these do not return a value for this specific option\n- cooksAmount: amount of cooks\n- ingredients: a json containing two other jsons with the keys \"yourIngredients\" and \"extraIngredients\". The ingredients in this field should have the same data-format as given in the input-data, except for the \"isEditMode\"-flag.\n- directions: a json containing each step as a seperate json with these fields: order, title, description, cook (number indicating which cook should do this step, based on \"cooksAmount\")\n\nThis is the angular/typescript representation of a recipe:\n\nGeneratedRecipe {\n  title: string;\n  cookingTime: string;\n  nutritionalInformation: NutritionalInformation;\n  preferences: Preferences;\n  cooksAmount: number;\n  ingredients: Ingredients;\n  directions: Direction[];\n}\n\nexport interface NutritionalInformation {\n  calories: string;\n  proteins: string;\n  fats: string;\n  carbs: string;\n}\n\nexport interface Preferences {\n  cookingTime: string;\n  cuisine: string;\n  dietPreferences: string;\n}\n\nexport interface Ingredients {\n  yourIngredients: YourIngredient[];\n  extraIngredients: ExtraIngredient[];\n}\n\nexport interface YourIngredient {\n  ingredient: string;\n  servingSize: string;\n}\n\nexport interface ExtraIngredient {\n  ingredient: string;\n  servingSize: string;\n}\n\nexport interface Direction {\n  order: number;\n  title: string;\n  description: string;\n  cook: number;\n}\n\nMAKE SURE THAT THE RECIPES ALWAYS FOLLOW THIS EXACT STRUCTURE. RETURN A JSON CONTAINING ONLY THESE THREE RECIPES WITHOUT ANY OTHER DATA OR TEXT!\n\nRecipe-data:\n\n{{ JSON.stringify($json.body) }}",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        208,
+        1040,
         0
       ],
       "id": "5ee198b9-d4d2-4a34-baa5-eb70370fe005",
@@ -41,7 +41,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        720,
+        1552,
         0
       ],
       "id": "c7f7827c-43f5-4814-823c-619df3472549",
@@ -54,7 +54,7 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        80,
+        912,
         208
       ],
       "id": "6078fc6f-fa3a-460c-8467-36ee5dc77a58",
@@ -73,11 +73,45 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        528,
+        1360,
         0
       ],
       "id": "88efdeba-d616-41ec-86c2-e8d0eb6c5957",
       "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "jsCode": "// erzeugt dayKey = 2025-11-11 im UTC Format\nconst now = new Date();\nconst dayKey = now.toISOString().slice(0, 10); \n// optionaler Grenzwert zentral hier\nconst SYSTEM_LIMIT = 12;\n\nreturn {data: $input.all(), key: { dayKey, SYSTEM_LIMIT }};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -224,
+        0
+      ],
+      "id": "96285c12-5c9d-4ed9-bf5e-2613c85c4dfb",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "9nN2IBlxnmZ271Vj",
+          "mode": "list",
+          "cachedResultName": "Recipe-quota",
+          "cachedResultUrl": "/projects/6twtEpL5lX6uOv1x/datatables/9nN2IBlxnmZ271Vj"
+        },
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        0
+      ],
+      "id": "0cd00c30-4725-47d5-9687-5e67651d1612",
+      "name": "Get row(s)"
     }
   ],
   "pinData": {
@@ -94,7 +128,7 @@
       "main": [
         [
           {
-            "node": "AI Agent",
+            "node": "Code in JavaScript1",
             "type": "main",
             "index": 0
           }
@@ -133,13 +167,35 @@
           }
         ]
       ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "active": false,
+  "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "9604dd78-a3d7-476b-8f70-9969b349834a",
+  "versionId": "828f3297-fbc6-48a2-b24f-aef829358ec6",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "7c3d82778fe390a8a96b680fce69390d06ef8ca6ee4f3b830ea49e7ddde74fba"

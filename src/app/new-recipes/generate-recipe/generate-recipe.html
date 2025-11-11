@@ -77,8 +77,9 @@
         </div>
       </div>
 
-      <a class="mt-8 bg-green-primary text-white px-6 py-4 self-end" [routerLink]="['/choose-preferences/']">Next
-        step</a>
+      <button (click)="onNavigateToPreferences()"
+        class="mt-8 bg-green-primary text-white px-6 py-4 self-end cursor-pointer">Next
+        step</button>
     </div>
   </div>
 </main>

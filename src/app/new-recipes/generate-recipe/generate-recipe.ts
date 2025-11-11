@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Ingredient } from '../../models/recipe.model';
 import { GenerateRecipeService } from '../../services/generate-recipe.service';
 @Component({
@@ -21,7 +21,8 @@ export class GenerateRecipe {
 
   constructor(
     public generateRecipeService: GenerateRecipeService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private router: Router,
   ) {}
 
   @HostListener('document:click', ['$event'])
@@ -60,5 +61,11 @@ export class GenerateRecipe {
   deleteIngredient(ingredient: Ingredient) {
     let index = this.generateRecipeService.recipeRequirements.ingredients.indexOf(ingredient);
     this.generateRecipeService.recipeRequirements.ingredients.splice(index, 1);
+  }
+
+  onNavigateToPreferences() {
+    if (this.generateRecipeService.recipeRequirements.ingredients.length > 0) {
+      this.router.navigate(['/choose-preferences']);
+    }
   }
 }
