@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { map, switchMap } from 'rxjs';
+import { GeneratedRecipe } from '../../models/generated-recipe.model';
 import { FirebaseService } from '../../services/firebase-recipe.service';
 import { GenerateRecipeService } from '../../services/generate-recipe.service';
 import { StateService } from '../../services/state.service';
@@ -25,7 +26,13 @@ export class Preferences {
       this.generateRecipeService
         .generateRecipe(requirements)
         .pipe(
-          switchMap((generatedRecipes) => {
+          map((response: any) => {
+            if (response.detail.toLowerCase() === 'quota exceeded') {
+              throw new Error('Quota exceeded');
+            }
+            return response;
+          }),
+          switchMap((generatedRecipes: GeneratedRecipe[]) => {
             return this.firebaseService.saveRecipesToCookbook(generatedRecipes).pipe(
               map((firebaseResponses: { name: string }[]) => {
                 const recipesWithIds = generatedRecipes.map((recipe, index) => {

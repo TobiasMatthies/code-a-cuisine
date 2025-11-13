@@ -54,7 +54,7 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        1200,
+        1184,
         160
       ],
       "id": "6078fc6f-fa3a-460c-8467-36ee5dc77a58",
@@ -65,19 +65,6 @@
           "name": "Google Gemini(PaLM) Api account"
         }
       }
-    },
-    {
-      "parameters": {
-        "jsCode": "return JSON.parse(\n    $input.first().json.output\n      .replace(/```json|```/g, '')\n      .replace(/^json\\\\n/, '')\n      .replace(/\\\\n/g, '\\n')\n      .replace(/\\\\\"/g, '\"')\n      .trim()\n  );"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1504,
-        16
-      ],
-      "id": "88efdeba-d616-41ec-86c2-e8d0eb6c5957",
-      "name": "Code in JavaScript"
     },
     {
       "parameters": {
@@ -161,7 +148,7 @@
             {
               "id": "8c57d6f6-0df7-4c08-b5da-35e40cf26c60",
               "leftValue": "={{ $json.quota }}",
-              "rightValue": "={{ 12 }}",
+              "rightValue": "={{ 2 }}",
               "operator": {
                 "type": "number",
                 "operation": "gt"
@@ -183,8 +170,8 @@
     },
     {
       "parameters": {
-        "respondWith": "text",
-        "responseBody": "Daily quota exceeded",
+        "respondWith": "json",
+        "responseBody": "{\n  \"detail\": \"Quota exceeded\"\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
@@ -218,7 +205,8 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "quota": "={{ $json.quota }}"
+            "quota": "={{ $json.quota }}",
+            "daykey": "={{ $('Generate Daykey').item.json.key.dayKey }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -230,7 +218,7 @@
               "display": true,
               "type": "string",
               "readOnly": false,
-              "removed": true
+              "removed": false
             },
             {
               "id": "quota",
@@ -269,6 +257,19 @@
       ],
       "id": "a0bb60b8-683c-4afd-a37b-3cd7cb419027",
       "name": "Update Quota"
+    },
+    {
+      "parameters": {
+        "jsCode": "return JSON.parse(\n    $input.first().json.output\n      .replace(/```json|```/g, '')\n      .replace(/^json\\\\n/, '')\n      .replace(/\\\\n/g, '\\n')\n      .replace(/\\\\\"/g, '\"')\n      .trim()\n  );"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1504,
+        16
+      ],
+      "id": "88efdeba-d616-41ec-86c2-e8d0eb6c5957",
+      "name": "Parse Output"
     }
   ],
   "pinData": {
@@ -351,7 +352,7 @@
       "main": [
         [
           {
-            "node": "Code in JavaScript",
+            "node": "Parse Output",
             "type": "main",
             "index": 0
           }
@@ -364,17 +365,6 @@
           {
             "node": "AI Agent",
             "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code in JavaScript": {
-      "main": [
-        [
-          {
-            "node": "Respond to Webhook",
-            "type": "main",
             "index": 0
           }
         ]
@@ -463,13 +453,24 @@
           }
         ]
       ]
+    },
+    "Parse Output": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "d687c8d7-c0e4-4db9-9e82-fe1ffb6d50d0",
+  "versionId": "8c0f4290-5dec-4a0c-833b-0a7d94257162",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "7c3d82778fe390a8a96b680fce69390d06ef8ca6ee4f3b830ea49e7ddde74fba"
