@@ -27,7 +27,7 @@ export class Preferences {
         .generateRecipe(requirements)
         .pipe(
           map((response: any) => {
-            if (response.detail.toLowerCase() === 'quota exceeded') {
+            if (response.detail?.toLowerCase() === 'quota exceeded') {
               throw new Error('Quota exceeded');
             }
             return response;
