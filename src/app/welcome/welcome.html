@@ -1,30 +1,32 @@
-<main class="bg-green-primary px-16 min-h-dvh">
-  <div class="text-cream-primary max-w-[1440px] min-h-dvh m-auto relative flex flex-col">
+<main class="bg-green-primary px-4 md:px-8 lg:px-16 min-h-dvh relative xl:static overflow-x-hidden">
+  <div class="text-cream-primary max-w-[1440px] min-h-dvh m-auto xl:relative flex flex-col overflow-hidden">
     <header class="w-full m-auto py-10">
       <img src="img/Capa_2.svg" alt="logo" />
     </header>
 
-    <div class="my-24 flex-1 flex flex-col">
+    <div class="my-11 md:my-24 flex-1 flex flex-col w-[80%] md:w-full">
       <div class="flex flex-col justify-between items-start h-full flex-1">
         <div>
-          <h3 class="text-5xl font-semibold">AI-Powered recipe generator</h3>
-          <h1 class="text-8xl font-bold font-ubuntu">Code à Cuisine</h1>
+          <h3 class="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-semibold">AI-Powered recipe generator</h3>
+          <h1 class="text-6xl md:text-7xl xl:text-8xl font-bold font-ubuntu">Code à Cuisine</h1>
 
           <a [routerLink]="['generate-recipe/']"
-            class="inline-block text-2xl bg-cream-primary text-green-text py-4 px-6 mt-20 hover:bg-cream-light">Get
+            class="inline-block text-base md:text-2xl bg-cream-primary text-green-text py-1 px-4 md:py-4 md:px-6 mt-20 hover:bg-cream-light">Get
             started</a>
         </div>
 
-        <p class="flex items-center gap-10 justify-self-end h-full">
-          <span class="text-4xl font-ubuntu">Hungry for inspiration?</span>
+        <p class="xl:flex items-center gap-10 justify-self-end h-full">
+          <span class="block xl:flex text-2xl md:text-4xl font-ubuntu mb-1">Hungry for inspiration?</span>
           <a routerLink="/cookbook">
-            <span class="mr-4">Go to cookbook </span>
+            <span class="mr-4 text-lg">Go to cookbook </span>
             <img class="inline-block" src="img/Arrow 18.svg" alt="arrow" />
           </a>
         </p>
       </div>
 
-      <img class="absolute top-0 right-0 bottom-0 h-dvh" src="img/Visuals.png" alt="dishes" />
+      <img
+        class="absolute top-0 right-0 bottom-0 h-dvh object-cover translate-x-[70%] lg:translate-x-[50%] xl:translate-0"
+        src="img/Visuals.png" alt="dishes" />
     </div>
   </div>
 </main>
