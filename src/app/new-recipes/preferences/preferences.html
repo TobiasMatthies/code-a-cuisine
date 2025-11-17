@@ -2,7 +2,7 @@
 <app-loading-screen class="fixed w-full"></app-loading-screen>
 }
 
-<main class="px-16 min-h-dvh">
+<main class="px-4 md:px-8 lg:px-16 min-h-dvh">
   <div class="text-green-primary max-w-[1440px] min-h-dvh m-auto">
     <header class="w-full m-auto py-10">
       <img src="img/Capa_2 (1).svg" alt="logo" />
@@ -13,10 +13,10 @@
       Ingredients
     </a>
 
-    <div class="flex flex-col items-center text-green-primary gap-8 mt-16 w-full">
-      <h1 class="text-3xl font-semibold">Choose your preferences</h1>
+    <div class="flex flex-col items-start md:items-center text-green-primary gap-8 mt-16 w-full">
+      <h1 class="text-2xl sm:text-3xl font-semibold">Choose your preferences</h1>
 
-      <div class="flex gap-32 my-6">
+      <div class="flex flex-col md:flex-row gap-6 md:gap-32 my-6">
         <div>
           <h3>How many portions you need?</h3>
           <p class="flex gap-2 mt-5 items-center">
@@ -45,7 +45,7 @@
             <img class="mr-0.5" src="img/Frame 750.svg" alt="time">
             <h3 class="text-2xl font-semibold">Cooking time: </h3>
           </div>
-          <div class="flex gap-5 mt-6">
+          <div class="flex gap-5 mt-6 flex-wrap">
             @for (time of preferences.times; track $index) {
             <button
               [ngClass]="generateRecipeService.recipeRequirements.cookingTime === time ? 'bg-green-light' : 'bg-cream-light hover:bg-cream-primary'"
@@ -60,7 +60,7 @@
             <img class="mr-0.5" src="img/public.svg" alt="time">
             <h3 class=" text-2xl font-semibold">Cuisine: </h3>
           </div>
-          <div class="flex gap-5 mt-6">
+          <div class="flex gap-5 mt-6 flex-wrap">
             @for (cuisine of preferences.cuisine; track $index) {
             <button (click)="selectPreference('cuisine', cuisine.name)"
               [ngClass]="generateRecipeService.recipeRequirements.cuisine === cuisine.name ? 'bg-green-light' : 'bg-cream-light hover:bg-cream-primary'"
@@ -74,7 +74,7 @@
             <img class="mr-0.5" src="img/fork_spoon.svg" alt="time">
             <h3 class=" text-2xl font-semibold">Diet Preferences: </h3>
           </div>
-          <div class="flex gap-5 mt-6">
+          <div class="flex gap-5 mt-6 flex-wrap">
             @for (diet of preferences.dietPrefences; track $index) {
             <button (click)="selectPreference('dietPreferences', diet)"
               [ngClass]="generateRecipeService.recipeRequirements.dietPreferences === diet ? 'bg-green-light' : 'bg-cream-light hover:bg-cream-primary'"
@@ -86,7 +86,7 @@
       </div>
 
       <button (click)="onGenerateRecipe()"
-        class="mt-8 bg-green-primary text-white px-6 font-semibold py-4 text-2xl cursor-pointer">Generate
+        class="mb-8 mx-auto bg-green-primary text-white px-6 font-semibold py-4 text-base md:text-2xl cursor-pointer">Generate
         Recipe</button>
     </div>
   </div>
