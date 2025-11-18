@@ -10,13 +10,13 @@
 
     <a [routerLink]="['/generate-recipe/']">
       <img class="inline" src="img/Arrow 11.svg" alt="Arrow back">
-      Ingredients
+      <span class="hidden md:inline">Ingredients</span>
     </a>
 
-    <div class="flex flex-col items-start md:items-center text-green-primary gap-8 mt-16 w-full">
+    <div class="flex flex-col items-start md:items-center text-green-primary gap-6 md:gap-8 mt-10 md:mt-16 w-full">
       <h1 class="text-2xl sm:text-3xl font-semibold">Choose your preferences</h1>
 
-      <div class="flex flex-col md:flex-row gap-6 md:gap-32 my-6">
+      <div class="flex flex-col md:flex-row gap-6 md:gap-32 md:my-6">
         <div>
           <h3>How many portions you need?</h3>
           <p class="flex gap-2 mt-5 items-center">

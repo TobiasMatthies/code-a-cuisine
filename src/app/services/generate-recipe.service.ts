@@ -12,17 +12,18 @@ const webhookUrl = environment.webhookUrl;
   providedIn: 'root',
 })
 export class GenerateRecipeService {
-  recipeRequirements: RecipeRequirements = this.getDefaultRecipeRequirements();
+  recipeRequirements: RecipeRequirements;
 
   constructor(
     private http: HttpClient,
 
     private state: StateService,
-  ) {}
+  ) {
+    this.recipeRequirements = this.getDefaultRecipeRequirements();
+  }
 
   generateRecipe(requirements: RecipeRequirements): Observable<GeneratedRecipe[]> {
     const response = this.http.post<GeneratedRecipe[]>(webhookUrl, requirements);
-    this.recipeRequirements = this.getDefaultRecipeRequirements();
     return response;
   }
 
