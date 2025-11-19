@@ -1,24 +1,24 @@
-<main class="px-16 min-h-dvh">
+<main class="px-4 md:px-8 lg:px-16  min-h-dvh">
     <div class="text-green-primary max-w-[1440px] min-h-dvh m-auto">
         <header class="w-full m-auto py-10">
             <img src="img/Capa_2 (1).svg" alt="logo" />
         </header>
 
-        <a class="flex gap-2.5 mb-16" routerLink="/recipe-results">
+        <a class="flex gap-2.5 mb-16 size-fit" routerLink="/recipe-results">
             <img src="img/Arrow 11.svg" alt="arrow back">
             Recipe Results
         </a>
 
-        <div class="bg-green-opaque py-10 px-6 flex items-end gap-4 rounded-3xl">
+        <div class="bg-green-opaque py-4 sm:py-10 px-6 flex flex-col lg:flex-row items-end gap-4 rounded-3xl">
             <div class="flex-1">
-                <h1 class="text-6xl font-bold">Cookbook</h1>
-                <p class="mb-4 text-2xl">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold">Cookbook</h1>
+                <p class="mb-4 text-base md:text-2xl">
                     From quick bites to gourmet delights, explore them all in our ultimate cookbook
                     and get inspired for yournext culinary adventure.
                 </p>
             </div>
 
-            <div class="flex-2 overflow-x-auto recipe-container">
+            <div class="lg:flex-2 overflow-x-auto recipe-container max-w-full">
                 <h3 class="font-semibold text-2xl flex flex-1 gap-4">Most liked recipes <img class="h-7 w-8"
                         src="img/favorite.svg" alt="Heart"></h3>
                 <div class="flex gap-6 rounded-2xl">
@@ -44,9 +44,10 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-3 gap-x-[60px] gap-y-14">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-[60px] gap-y-6 sm:gap-y-14">
             @for (cuisine of state.preferences.cuisine; track $index) {
-            <a [routerLink]="['/recipes-list']" [queryParams]="{ cuisine: cuisine.name }">
+            <a class="max-w-96 sm:max-w-full mx-auto sm:mx-0" [routerLink]="['/recipes-list']"
+                [queryParams]="{ cuisine: cuisine.name }">
                 <figure>
                     <figcaption class="text-3xl font-semibold">{{cuisine.name}} {{cuisine.emoji}}</figcaption>
                     <img class="w-full" [src]="cuisine.thumbnail_img" alt="cuisine">
