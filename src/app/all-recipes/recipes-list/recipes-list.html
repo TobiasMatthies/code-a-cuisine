@@ -20,7 +20,7 @@
 
         <div class="flex flex-col gap-8">
             @for (recipe of state.selectedRecipes; track $index) {
-            <a [routerLink]="['/recipe-results', recipe.id]"
+            <a [routerLink]="['/recipe-results', recipe.id]" [queryParams]="{from: 'cookbook', cuisine: cuisine?.name}"
                 class="text-green-primary flex flex-col gap-4 lg:gap-0 lg:flex-row mb-3.5 justify-between lg:items-center">
                 <div class="flex items-end gap-2">
                     <span

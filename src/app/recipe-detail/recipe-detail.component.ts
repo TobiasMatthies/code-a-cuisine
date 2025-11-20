@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Recipe } from '../models/generated-recipe.model';
 import { FirebaseService } from '../services/firebase-recipe.service';
 import { StateService } from '../services/state.service';
@@ -17,6 +17,7 @@ export class RecipeDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private state: StateService,
     private firebaseService: FirebaseService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -32,5 +33,16 @@ export class RecipeDetailComponent implements OnInit {
         console.log(this.selectedRecipe);
       });
     console.log(this.selectedRecipe);
+  }
+
+  onNavigateBack() {
+    let currentRoute = this.activatedRoute.snapshot;
+    let fromComponent = currentRoute.queryParamMap.get('from');
+
+    if (fromComponent === 'results') this.router.navigate(['recipe-results/']);
+    if (fromComponent === 'cookbook') {
+      let cuisine = currentRoute.queryParamMap.get('cuisine');
+      this.router.navigate(['recipes-list/'], { queryParams: { cuisine: cuisine } });
+    }
   }
 }
