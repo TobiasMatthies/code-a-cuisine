@@ -1,29 +1,30 @@
-<main class="px-16 min-h-dvh">
+<main class="px-4 md:px-8 lg:px-16 min-h-dvh">
     <div class="text-green-primary max-w-[1440px] min-h-dvh m-auto">
         <header class="w-full m-auto py-10">
             <img src="img/Capa_2 (1).svg" alt="logo" />
         </header>
 
         <div class="flex justify-between items-center">
-            <a class="flex my-16 gap-2.5" routerLink="/cookbook">
+            <a class="flex mt-4 md:my-16 gap-2.5" routerLink="/cookbook">
                 <img src="img/Arrow 11.svg" alt="Arrow">
-                Cookbook
+                <span class="hidden md:inline">Cookbook</span>
             </a>
 
             <a routerLink="/generate-recipe"
-                class="mt-8 bg-green-primary text-white px-6 font-semibold py-4 text-2xl cursor-pointer">Generate a
+                class="mt-8 bg-green-primary text-white px-6 font-semibold py-4 text-2xl cursor-pointer hidden md:inline">Generate
+                a
                 Recipe</a>
         </div>
 
-        <img class="w-full" [src]="cuisine?.header_img" alt="header">
+        <img class="w-full my-10 md:my-0" [src]="cuisine?.header_img" alt="header">
 
-        <div>
+        <div class="flex flex-col gap-8">
             @for (recipe of state.selectedRecipes; track $index) {
             <a [routerLink]="['/recipe-results', recipe.id]"
-                class="text-green-primary flex mb-3.5 justify-between items-center">
+                class="text-green-primary flex flex-col gap-4 lg:gap-0 lg:flex-row mb-3.5 justify-between lg:items-center">
                 <div class="flex items-end gap-2">
                     <span
-                        class="bg-cream-light rounded-full h-10 w-10 flex items-center justify-center text-center mr-1 font-normal">
+                        class="bg-cream-light rounded-full h-10 w-10 min-w-10 flex items-center justify-center text-center mr-1 font-normal">
                         {{$index+1}}.
                     </span>
                     <div>
@@ -31,24 +32,25 @@
                             <img class="h-4 w-4" src="img/Frame 750.svg" alt="clock">
                             Cooking time: {{recipe.cookingTime}}
                         </p>
-                        <h5 class="text-2xl">{{recipe.title}}</h5>
+                        <h5 class="text-xl md:text-2xl hidden md:block">{{recipe.title}}</h5>
                     </div>
-
                 </div>
+
+                <h5 class="text-xl md:text-2xl md:hidden">{{recipe.title}}</h5>
 
                 <div class="flex gap-2">
                     @if (recipe.preferences.dietPreferences.toLowerCase() !== "no preferences") {
                     <span
-                        class="flex rounded-4xl py-1.5 px-3 bg-green-light items-center box-border min-w-10 text-lg font-medium">
+                        class="flex rounded-4xl py-1.5 px-3 bg-green-light items-center box-border min-w-10 text-base md:text-lg font-medium">
                         {{recipe.preferences.dietPreferences}}
                     </span>
                     }
                     <span
-                        class="flex rounded-4xl py-1.5 px-3 bg-green-light items-center box-border min-w-10 text-lg font-medium">
+                        class="flex rounded-4xl py-1.5 px-3 bg-green-light items-center box-border min-w-10 text-base md:text-lg font-medium">
                         {{recipe.preferences.cookingTime}}
                     </span>
                     <span
-                        class="flex rounded-4xl py-1.5 px-3 bg-green-light items-center box-border min-w-10 text-lg font-medium">
+                        class="flex rounded-4xl py-1.5 px-3 bg-green-light items-center box-border min-w-10 text-base md:text-lg font-medium">
                         <img class="w-4 h-4" src="img/favorite.svg" alt="heart">
                         {{recipe.likes}}
                     </span>
